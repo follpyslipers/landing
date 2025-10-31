@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            padding-top: 80px; /* Space for fixed header */
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        
+        .logo {
+            width: 93px;
+            height: 28.58px;
+        }
+        
+        .brain-image {
+            width: 100%;
+            max-width: 855px;
+            height: auto;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .logo-item {
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .slide-in-left {
+            animation: slideInLeft 1s ease-out;
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* Updated Button Styles - Black with reflection */
+        .btn-primary-custom {
+            background-color: #000000;
+            color: white;
+            padding: 12px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary-custom::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            animation: reflection 3s infinite linear;
+        }
+        
+        .btn-primary-custom:hover {
+            background-color: #333333;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            color: white;
+        }
+        
+        .btn-secondary-custom {
+            background-color: transparent;
+            color: #000000;
+            padding: 12px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid #000000;
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-secondary-custom::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(0,0,0,0.3), transparent);
+            animation: reflection 3s infinite linear;
+        }
+        
+        .btn-secondary-custom:hover {
+            background-color: #000000;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        @keyframes reflection {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+        
+        .nav-link {
+            color: #4b5563;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #000000;
+        }
+        
+        /* Header button styles - Black with reflection */
+        .header-btn-primary {
+            background-color: #000000;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            animation: reflection 3s infinite linear;
+        }
+        
+        .header-btn-primary:hover {
+            background-color: #333333;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header-btn-outline {
+            border: 2px solid #000000;
+            color: #000000;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-btn-outline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(0,0,0,0.3), transparent);
+            animation: reflection 3s infinite linear;
+        }
+        
+        .header-btn-outline:hover {
+            background-color: #000000;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Fixed Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        /* Logo Section Styles */
+        .logo-container {
+            position: relative;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 60px 0;
+            overflow: hidden;
+            width: 100%;
+        }
+        
+        .logo-track {
+            display: flex;
+            gap: 60px;
+            animation: scrollRight 30s linear infinite;
+        }
+        
+        .logo-item {
+            flex-shrink: 0;
+            transition: all 0.5s ease;
+            position: relative;
+        }
+        
+        .logo-item img {
+            height: 50px;
+            transition: all 0.5s ease;
+            filter: blur(4px);
+            opacity: 0.6;
+        }
+        
+        /* Center logo styling - dynamically applied via JavaScript */
+        .logo-item.center-logo {
+            transform: scale(1.8);
+            z-index: 10;
+        }
+        
+        .logo-item.center-logo img {
+            height: 80px;
+            filter: blur(0);
+            opacity: 1;
+        }
+        
+        /* Side logos styling */
+        .logo-item.side-logo {
+            transform: scale(1.3);
+        }
+        
+        .logo-item.side-logo img {
+            height: 65px;
+            filter: blur(2px);
+            opacity: 0.8;
+        }
+        
+        /* Outer logos styling */
+        .logo-item.outer-logo {
+            transform: scale(1);
+        }
+        
+        .logo-item.outer-logo img {
+            height: 50px;
+            filter: blur(4px);
+            opacity: 0.6;
+        }
+        
+        /* Hover effects - reduce blur on hover */
+        .logo-item:hover img {
+            filter: blur(0) !important;
+            opacity: 1 !important;
+        }
+        
+        /* Scroll animation */
+        @keyframes scrollRight {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-100% - 60px));
+            }
+        }
+        
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+            }
+            
+            /* Header adjustments for mobile */
+            header .container {
+                padding: 0 16px;
+            }
+            
+            /* Mobile navigation */
+            .mobile-nav {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 20px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: all 0.3s ease;
+                z-index: 999;
+            }
+            
+            .mobile-nav.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            
+            .mobile-nav a {
+                display: block;
+                padding: 12px 0;
+                border-bottom: 1px solid #f1f1f1;
+                color: #4b5563;
+                font-weight: 500;
+                text-decoration: none;
+            }
+            
+            .mobile-nav a:last-child {
+                border-bottom: none;
+            }
+            
+            /* Hero section mobile adjustments */
+            .hero-section {
+                padding: 20px 0;
+            }
+            
+            .brain-image {
+                max-width: 100%;
+                margin-top: 30px;
+            }
+            
+            h1 {
+                font-size: 2rem !important;
+                text-align: center;
+            }
+            
+            p {
+                text-align: center;
+            }
+            
+            /* Button adjustments for mobile */
+            .btn-primary-custom,
+            .btn-secondary-custom {
+                padding: 14px 28px;
+                width: 100%;
+                max-width: 280px;
+                margin: 0 auto;
+            }
+            
+            .btn-group-mobile {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                align-items: center;
+            }
+            
+            /* Logo section mobile adjustments */
+            .logo-container {
+                padding: 40px 0;
+            }
+            
+            .logo-track {
+                gap: 30px;
+                animation: scrollRightMobile 25s linear infinite;
+            }
+            
+            .logo-item img {
+                height: 30px;
+            }
+            
+            .logo-item.center-logo {
+                transform: scale(1.4);
+            }
+            
+            .logo-item.center-logo img {
+                height: 50px;
+            }
+            
+            .logo-item.side-logo {
+                transform: scale(1.1);
+            }
+            
+            .logo-item.side-logo img {
+                height: 40px;
+            }
+            
+            .logo-item.outer-logo img {
+                height: 30px;
+            }
+            
+            @keyframes scrollRightMobile {
+                0% {
+                    transform: translateX(0);
+                }
+                100% {
+                    transform: translateX(calc(-100% - 30px));
+                }
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.75rem !important;
+            }
+            
+            .logo-track {
+                gap: 20px;
+            }
+            
+            .logo-item img {
+                height: 25px;
+            }
+            
+            .logo-item.center-logo img {
+                height: 40px;
+            }
+            
+            .logo-item.side-logo img {
+                height: 32px;
+            }
+            
+            .logo-item.outer-logo img {
+                height: 25px;
+            }
+        }
+        
+        /* Additional animations */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        .pulse-animation {
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .slide-up {
+            animation: slideUp 0.8s ease-out forwards;
+        }
+        
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <!-- Fixed Header -->
+    <header class="container mx-auto px-4 py-4">
+        <div class="flex justify-between items-center">
+            <!-- Logo -->
+            <div class="logo slide-in-left">
+                <img src="logo.png" alt="Logo" class="logo">
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-8">
+                <a href="#" class="nav-link">Home</a>
+                <a href="#" class="nav-link">Features</a>
+                <a href="#" class="nav-link">Resources</a>
+                <a href="#" class="nav-link">Pricing</a>
+            </nav>
+            
+            <!-- Header Buttons -->
+            <div class="flex items-center space-x-4">
+                <a href="#" class="header-btn-outline hidden md:inline-block">Get Started</a>
+                <a href="#" class="header-btn-primary">Contact Us</a>
+                <!-- Mobile menu button -->
+                <button class="md:hidden text-gray-600 mobile-menu-btn">
+                    <i class="bi bi-list text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div class="mobile-nav md:hidden">
+            <a href="#" class="nav-link-mobile">Home</a>
+            <a href="#" class="nav-link-mobile">Features</a>
+            <a href="#" class="nav-link-mobile">Resources</a>
+            <a href="#" class="nav-link-mobile">Pricing</a>
+            <div class="mt-4 pt-4 border-t border-gray-200">
+                <a href="#" class="header-btn-outline block text-center mb-3">Get Started</a>
+                <a href="#" class="header-btn-primary block text-center">Contact Us</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <!-- Main Content -->
+        <div class="container mx-auto px-4 py-12">
+            <div class="flex flex-col lg:flex-row items-center">
+                <!-- Left Content -->
+                <div class="lg:w-1/2 fade-in">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 leading-tight mb-6 slide-up">
+                        The best way to predict the future is to create it.
+                    </h1>
+                    <p class="text-lg text-gray-600 mb-8 slide-up stagger-1">
+                        We are a team of professionals in economics, human resources, software development, communication, and data science.
+                    </p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 btn-group-mobile">
+                        <a href="#" class="btn-primary-custom text-center slide-up stagger-2 pulse-animation">Get Started</a>
+                        <a href="#" class="btn-secondary-custom text-center slide-up stagger-3">Contact Us</a>
+                    </div>
+                </div>
+                
+                <!-- Right Content - Brain Image -->
+                <div class="lg:w-1/2 mt-12 lg:mt-0 flex justify-center slide-up stagger-4">
+                    <img src="brainimage.png" alt="Brain Illustration" class="brain-image">
+                </div>
+            </div>
+        </div>
+
+        <!-- Logo Section -->
+        <div class="container mx-auto px-4 py-12">
+            <div class="logo-container">
+                <div class="logo-track" id="logoTrack">
+                    <div class="logo-item">
+                        <img src="logo1.png" alt="Logo 1">
+                    </div>
+                    <div class="logo-item">
+                        <img src="logo2.png" alt="Logo 2">
+                    </div>
+                    <div class="logo-item">
+                        <img src="logo3.png" alt="Logo 3">
+                    </div>
+                    <div class="logo-item">
+                        <img src="logo4.png" alt="Logo 4">
+                    </div>
+                    <div class="logo-item">
+                        <img src="logo5.png" alt="Logo 5">
+                    </div>
+                    <!-- Duplicate for seamless loop -->
+                    <div class="logo-item">
+                        <img src="logo1.png" alt="Logo 1">
+                    </div>
+                    <div class="logo-item">
+                        <img src="logo2.png" alt="Logo 2">
+                    </div>
+                    <div class="logo-item">
+                        <img src="logo3.png" alt="Logo 3">
+                    </div>
+                    <div class="logo-item">
+                        <img src="logo4.png" alt="Logo 4">
+                    </div>
+                    <div class="logo-item">
+                        <img src="logo5.png" alt="Logo 5">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Add scroll animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe elements for animation
+            const elementsToAnimate = document.querySelectorAll('.logo-item, .btn-primary-custom, .btn-secondary-custom');
+            elementsToAnimate.forEach(el => {
+                observer.observe(el);
+            });
+
+            // Mobile menu functionality
+            const mobileMenuButton = document.querySelector('.mobile-menu-btn');
+            const mobileNav = document.querySelector('.mobile-nav');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                mobileNav.classList.toggle('active');
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('.mobile-menu-btn') && !event.target.closest('.mobile-nav')) {
+                    mobileNav.classList.remove('active');
+                }
+            });
+
+            // Header scroll effect
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (window.scrollY > 50) {
+                    header.style.background = 'rgba(255, 255, 255, 0.98)';
+                    header.style.boxShadow = '0 2px 30px rgba(0, 0, 0, 0.15)';
+                } else {
+                    header.style.background = 'rgba(255, 255, 255, 0.95)';
+                    header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+                }
+            });
+
+            // Center logo detection and styling
+            function updateCenterLogo() {
+                const logoTrack = document.getElementById('logoTrack');
+                const logoItems = logoTrack.querySelectorAll('.logo-item');
+                const container = document.querySelector('.logo-container');
+                const containerRect = container.getBoundingClientRect();
+                const containerCenter = containerRect.left + containerRect.width / 2;
+                
+                // Reset all logos
+                logoItems.forEach(item => {
+                    item.classList.remove('center-logo', 'side-logo', 'outer-logo');
+                });
+                
+                // Find the logo closest to center
+                let closestLogo = null;
+                let minDistance = Infinity;
+                
+                logoItems.forEach(item => {
+                    const itemRect = item.getBoundingClientRect();
+                    const itemCenter = itemRect.left + itemRect.width / 2;
+                    const distance = Math.abs(itemCenter - containerCenter);
+                    
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        closestLogo = item;
+                    }
+                });
+                
+                // Apply center styling
+                if (closestLogo) {
+                    closestLogo.classList.add('center-logo');
+                    
+                    // Apply side styling to adjacent logos
+                    const allLogos = Array.from(logoItems);
+                    const centerIndex = allLogos.indexOf(closestLogo);
+                    
+                    // Previous and next logos (side logos)
+                    const prevLogo = allLogos[centerIndex - 1];
+                    const nextLogo = allLogos[centerIndex + 1];
+                    
+                    if (prevLogo) prevLogo.classList.add('side-logo');
+                    if (nextLogo) nextLogo.classList.add('side-logo');
+                    
+                    // Outer logos (two positions away)
+                    const prevOuterLogo = allLogos[centerIndex - 2];
+                    const nextOuterLogo = allLogos[centerIndex + 2];
+                    
+                    if (prevOuterLogo) prevOuterLogo.classList.add('outer-logo');
+                    if (nextOuterLogo) nextOuterLogo.classList.add('outer-logo');
+                }
+            }
+
+            // Update center logo on scroll and resize
+            window.addEventListener('scroll', updateCenterLogo);
+            window.addEventListener('resize', updateCenterLogo);
+            
+            // Initial update
+            updateCenterLogo();
+            
+            // Update continuously for smooth animation
+            setInterval(updateCenterLogo, 100);
+
+            // Add animation to elements when they come into view
+            const animatedElements = document.querySelectorAll('.slide-up');
+            const elementObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        elementObserver.unobserve(entry.target);
+                    }
+                });
+            });
+
+            animatedElements.forEach(el => {
+                el.style.animationPlayState = 'paused';
+                elementObserver.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
