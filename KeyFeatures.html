@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Detailed Overview of our Features</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- AOS (Animate On Scroll) CSS -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- Section Header -->
+  <section class="text-center py-12" data-aos="fade-down" data-aos-duration="1000">
+    <div class="inline-flex items-center gap-2 bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm font-medium shadow-sm">
+      <i class="bi bi-stars"></i>
+      Key Features
+    </div>
+    <h2 class="text-3xl md:text-4xl font-bold mt-4">Detailed Overview of our Features</h2>
+    <p class="text-gray-500 mt-2">Dive Deeper into Our Innovative Offerings</p>
+  </section>
+
+  <!-- Feature Cards -->
+  <section class="container pb-16">
+    <div class="space-y-12">
+
+      <!-- AI for Business -->
+      <div class="row align-items-center bg-white rounded-3 p-5 shadow-md hover:shadow-2xl transition-transform duration-500 hover:-translate-y-1" data-aos="fade-right">
+        <div class="col-md-6 mb-4 md:mb-0">
+          <h5 class="font-bold text-2xl md:text-3xl flex items-center gap-3 text-indigo-700">
+            <i class="bi bi-cpu text-indigo-600 text-2xl"></i> AI For Business
+          </h5>
+          <p class="text-gray-600 mt-3 text-base md:text-lg">
+            Empower your business with AI-driven insights and automation for smarter, faster growth.
+          </p>
+        </div>
+        <div class="col-md-6 text-center">
+          <img src="chatgptiii.png" alt="AI For Business" class="img-fluid rounded-xl transition-transform duration-700 hover:scale-105">
+        </div>
+      </div>
+
+      <!-- People & Tech -->
+      <div class="row align-items-center bg-white rounded-3 p-5 shadow-md hover:shadow-2xl transition-transform duration-500 hover:-translate-y-1 flex-wrap-reverse" data-aos="fade-left">
+        <div class="col-md-6 text-center">
+          <img src="profile.png" alt="People & Tech" class="img-fluid rounded-xl transition-transform duration-700 hover:scale-105">
+        </div>
+        <div class="col-md-6">
+          <h5 class="font-bold text-2xl md:text-3xl flex items-center gap-3 text-pink-700">
+            <i class="bi bi-people text-pink-600 text-2xl"></i> People & Tech
+          </h5>
+          <p class="text-gray-600 mt-3 text-base md:text-lg">
+            Unite your teams with smart technology for greater collaboration and growth.
+          </p>
+        </div>
+      </div>
+
+      <!-- Data Analytics -->
+      <div class="row align-items-center bg-white rounded-3 p-5 shadow-md hover:shadow-2xl transition-transform duration-500 hover:-translate-y-1" data-aos="fade-up">
+        <div class="col-md-6 mb-4 md:mb-0">
+          <h5 class="font-bold text-2xl md:text-3xl flex items-center gap-3 text-blue-700">
+            <i class="bi bi-graph-up text-blue-600 text-2xl"></i> Data Analytics
+          </h5>
+          <p class="text-gray-600 mt-3 text-base md:text-lg">
+            Drive smarter decisions with tailored data analytics. Unlock insights.
+          </p>
+        </div>
+        <div class="col-md-6 text-center">
+          <img src="sap.png" alt="Data Analytics" class="img-fluid rounded-xl transition-transform duration-700 hover:scale-105">
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- AOS Script -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: true
+    });
+  </script>
+
+</body>
+</html>

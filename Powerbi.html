@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Try Power BI – Interactive Charts</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f9fafb;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    .chart-box {
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 1.25rem;
+      transition: all 0.3s ease;
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    
+    .chart-box.animate-in {
+      animation: slideUpFadeIn 0.8s ease forwards;
+    }
+    
+    @keyframes slideUpFadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .chart-box:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+    }
+    
+    .dark-panel {
+      background: #0d1117;
+      color: #fff;
+      border-radius: 0.75rem;
+      padding: 2rem 1.5rem;
+      height: 100%;
+      opacity: 0;
+      transform: translateX(-20px);
+      animation: slideRightFadeIn 0.8s ease 0.3s forwards;
+    }
+    
+    @keyframes slideRightFadeIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    
+    .chart1-logo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 280px;
+      height: 140px;
+      transform: translate(-50%, -50%);
+      background-image: url('YOUR_LOGO_HERE.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      opacity: 0.06;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    .logo-animate {
+      opacity: 0;
+      transform: scale(0.8);
+      animation: scaleIn 0.8s ease 0.5s forwards;
+    }
+    
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    
+    .tab-button {
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .tab-button::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: #ff9f1c;
+      transition: width 0.3s ease;
+    }
+    
+    .tab-button.active {
+      background-color: #ff9f1c;
+      color: white;
+    }
+    
+    .tab-button.active::after {
+      width: 100%;
+    }
+    
+    .tab-button:hover:not(.active) {
+      background-color: #f0f0f0;
+      transform: translateY(-2px);
+    }
+    
+    .header-animate {
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 0.2s forwards;
+    }
+    
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .footer-animate {
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 0.7s forwards;
+    }
+    
+    .chart-tooltip {
+      position: absolute;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 100;
+    }
+    
+    .chart-container {
+      position: relative;
+    }
+    
+    .chart-container:hover .chart-tooltip {
+      opacity: 1;
+    }
+    
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255, 159, 28, 0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(255, 159, 28, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 159, 28, 0); }
+    }
+    
+    .btn-request {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-request::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+    
+    .btn-request:hover::before {
+      left: 100%;
+    }
+    
+    .btn-request:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body class="py-10">
+
+  <!-- Header -->
+  <div class="text-center mb-10 px-4 header-animate">
+    <span class="inline-block bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm mb-2 pulse">Power BI</span>
+    <h1 class="text-4xl font-bold mb-3">Try Power BI</h1>
+    <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+      Integrate everything from accounting to business metrics, and play with dynamic charts and filters to explore insights tailored to you.
+    </p>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container max-w-7xl">
+    <div class="row g-4">
+      <!-- Left Panel -->
+      <div class="col-lg-4">
+        <div class="dark-panel h-full">
+          <h5 class="text-xl font-semibold mb-4">Tablero de Indicadores Económicos Relevantes</h5>
+          <p class="text-sm text-gray-300 mb-3">Para observar y filtrar datos de publicación</p>
+          <hr class="border-gray-600 my-3" />
+          <label for="periodFilter" class="block text-sm text-gray-300 mb-2">Filtrar por períodos presidenciales</label>
+          <select id="periodFilter" class="form-select bg-gray-800 text-white border-gray-700 mb-5">
+            <option>All</option>
+            <option>2010–2015</option>
+            <option>2016–2020</option>
+            <option>2021–2025</option>
+          </select>
+
+          <h6 class="text-lg font-semibold mb-2">Objetivo:</h6>
+          <p class="text-sm text-gray-300 mb-4">
+            Observar una visión actualizada del comercio económico agregando precios de los indicadores estratégicos y comerciales.
+          </p>
+
+          <h6 class="text-lg font-semibold mb-2">Origen y fuentes:</h6>
+          <ul class="text-sm text-gray-300 list-disc pl-5 mb-4">
+            <li>Datos del consumidor – INDEC</li>
+            <li>Precios de mercado y comercio</li>
+            <li>Banco de Datos Económicos</li>
+          </ul>
+
+          <h6 class="text-lg font-semibold mb-2">Casos de uso:</h6>
+          <ul class="text-sm text-gray-300 list-disc pl-5">
+            <li>Comparar tasas anuales de variación</li>
+            <li>Evaluar riesgos macroeconómicos</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Right Panel -->
+      <div class="col-lg-8 flex flex-col gap-4">
+        <div class="flex justify-center mb-4">
+          <img src="logoo.png" alt="ACTIO Logo" class="h-12 logo-animate">
+        </div>
+
+        <!-- Tabs -->
+        <div class="flex justify-center gap-3 mb-5 flex-wrap">
+          <button class="tab-button px-4 py-2 rounded-full bg-gray-200 text-gray-800 hover:bg-gray-300 transition active">Under Stealth</button>
+          <button class="tab-button px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition">Exited Stealth</button>
+          <button class="tab-button px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition">Exited Stealth</button>
+        </div>
+
+        <!-- Chart 1 - Increased Size -->
+        <div class="chart-box mb-5 chart-container animate-in" style="height: 350px; animation-delay: 0.4s;">
+          <div class="chart1-logo"></div>
+          <h6 class="fw-semibold mb-3">Gráfico 1: Evolución mensual del IPC</h6>
+          <canvas id="chart1"></canvas>
+          <div class="chart-tooltip">Hover over data points for details</div>
+        </div>
+
+        <!-- Chart 2 & 3 -->
+        <div class="row g-4">
+          <div class="col-md-6">
+            <div class="chart-box chart-container animate-in" style="height: 250px; animation-delay: 0.5s;">
+              <h6 class="fw-semibold mb-3">Gráfico 2: Comparativa anual acumulada</h6>
+              <canvas id="chart2"></canvas>
+              <div class="chart-tooltip">Hover over bars for values</div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="chart-box chart-container animate-in" style="height: 250px; animation-delay: 0.6s;">
+              <h6 class="fw-semibold mb-3">Gráfico 3: Variación de inflación Acumulada vs Año Anterior</h6>
+              <canvas id="chart3"></canvas>
+              <div class="chart-tooltip">Hover over bars for values</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="text-center mt-12 px-4 py-8 bg-gray-50 rounded-lg footer-animate">
+      <h3 class="text-2xl font-semibold mb-3">Usage instructions</h3>
+      <p class="text-gray-600 max-w-xl mx-auto mb-4">
+        Use filters to view segments, click charts for details, and switch pages for different insights all in real time, best on desktop.
+      </p>
+      <a href="#" class="inline-block bg-black text-white px-5 py-3 rounded-full hover:bg-gray-800 transition btn-request">
+        Request information →
+      </a>
+    </div>
+  </div>
+
+  <!-- Chart Scripts -->
+  <script>
+    // Initialize animations
+    document.addEventListener('DOMContentLoaded', function() {
+      // Animate chart boxes
+      const chartBoxes = document.querySelectorAll('.chart-box');
+      chartBoxes.forEach((box, index) => {
+        box.style.animationDelay = `${0.4 + (index * 0.1)}s`;
+        box.classList.add('animate-in');
+      });
+      
+      // Add tab click animations
+      const tabButtons = document.querySelectorAll('.tab-button');
+      tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          tabButtons.forEach(btn => btn.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+      
+      // Add filter animation
+      const periodFilter = document.getElementById('periodFilter');
+      periodFilter.addEventListener('change', function() {
+        this.style.transform = 'scale(1.05)';
+        setTimeout(() => {
+          this.style.transform = 'scale(1)';
+        }, 300);
+      });
+    });
+
+    // Chart 1 with animation
+    const ctx1 = document.getElementById('chart1').getContext('2d');
+    new Chart(ctx1, {
+      type: 'line',
+      data: {
+        labels: ['2017','2018','2019','2020','2021','2022','2023','2024','2025'],
+        datasets: [
+          {
+            label: 'Indice de Precios al Consumidor',
+            data: [1.6, 2.2, 6.5, 5.9, 4.8, 8.4, 25.5, 2.2, 2.1],
+            borderColor: '#ff9f1c',
+            backgroundColor: 'rgba(255,159,28,0.2)',
+            tension: 0.4,
+            yAxisID: 'y',
+            fill: true
+          },
+          {
+            label: 'IPC acumulado',
+            data: [1.2, 29, 77, 117, 160, 225, 322, 445, 470],
+            borderColor: '#fce588',
+            backgroundColor: 'rgba(252,229,136,0.2)',
+            tension: 0.4,
+            yAxisID: 'y1',
+            fill: true
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: {
+          duration: 1500,
+          easing: 'easeOutQuart'
+        },
+        interaction: { mode: 'index', intersect: false },
+        stacked: false,
+        scales: {
+          y: { 
+            type: 'linear', 
+            position: 'left', 
+            min: 0, 
+            max: 30, 
+            ticks: { callback: v => v + '%' } 
+          },
+          y1: { 
+            type: 'linear', 
+            position: 'right', 
+            min: 0, 
+            max: 500, 
+            grid: { drawOnChartArea: false }, 
+            ticks: { callback: v => v + '%' } 
+          }
+        }
+      }
+    });
+
+    // Chart 2 with animation
+    const ctx2 = document.getElementById('chart2').getContext('2d');
+    new Chart(ctx2, {
+      type: 'bar',
+      data: {
+        labels: ['2017','2018','2019','2020','2021','2022','2023','2024','2025'],
+        datasets: [{
+          data: [22, 40, 44, 31, 42, 69, 121, 82, 20],
+          backgroundColor: ['#fcd34d','#fcd34d','#fbbf24','#f97316','#ef4444','#ef4444','#fbbf24'],
+          borderRadius: 5
+        }]
+      },
+      options: { 
+        responsive: true, 
+        maintainAspectRatio: false, 
+        animation: {
+          duration: 1500,
+          easing: 'easeOutBounce'
+        },
+        plugins: { legend: { display: false } }, 
+        scales: { 
+          y: { 
+            beginAtZero: true, 
+            max: 140, 
+            ticks: { callback: v => v + '%' } 
+          } 
+        } 
+      }
+    });
+
+    // Chart 3 with animation
+    const ctx3 = document.getElementById('chart3').getContext('2d');
+    const data3 = [77, 11, -29, 34, 64, 76, -32, -75];
+    new Chart(ctx3, {
+      type: 'bar',
+      data: {
+        labels: ['2018','2019','2020','2021','2022','2023','2024','2025'],
+        datasets: [{
+          label: 'Variación %',
+          data: data3,
+          backgroundColor: data3.map(v => v > 0 ? '#ef4444' : '#edc9af'),
+          borderRadius: 5
+        }]
+      },
+      options: { 
+        responsive: true, 
+        maintainAspectRatio: false, 
+        animation: {
+          duration: 1500,
+          easing: 'easeOutBounce'
+        },
+        plugins: { legend: { display: false } }, 
+        scales: { 
+          y: { 
+            beginAtZero: true, 
+            min: -100, 
+            max: 200, 
+            ticks: { callback: v => v + '%' } 
+          } 
+        } 
+      }
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
