@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us</title>
+  <meta name="description" content="Get in touch with us. Fill out the form and we'll respond within 24 hours." />
+
+  <!-- Preload Tailwind for performance -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS via CDN (with config for better consistency) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            primary: {
+              900: '#111',
+              800: '#222',
+              700: '#333',
+            }
+          },
+          borderRadius: {
+            'xl': '1rem',
+            '2xl': '1.5rem',
+          },
+          boxShadow: {
+            'soft': '0 8px 25px rgba(0, 0, 0, 0.08)',
+            'card': '0 10px 30px rgba(0, 0, 0, 0.1)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+
+  <style>
+    .gradient-btn {
+      background: linear-gradient(to right, #111, #333);
+      transition: all 0.3s ease;
+    }
+    .gradient-btn:hover {
+      background: linear-gradient(to right, #333, #111);
+      transform: translateY(-1px);
+      box-shadow: 0 12px 30px rgba(17, 17, 17, 0.25);
+    }
+    .input-focus:focus {
+      outline: none;
+      ring: 4px solid #e5e7eb;
+      box-shadow: 0 0 0 4px rgba(229, 231, 235, 0.5);
+    }
+    .map-iframe {
+      border-radius: 1.5rem;
+      border: 1px solid #e5e7eb;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col items-center justify-start pt-12 pb-24 px-4">
+
+  <!-- Header Section -->
+  <header class="text-center max-w-2xl mx-auto mb-12">
+    <div class="inline-flex items-center gap-2 bg-gray-200 text-gray-700 px-4 py-1.5 rounded-full text-sm font-semibold shadow-sm mb-4">
+      <i class="bi bi-envelope-fill text-sm"></i>
+      Contact Us
+    </div>
+    <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-3">Contact Us</h1>
+    <p class="text-lg text-gray-600">
+      We’re here to help. Fill out the form and we’ll get in touch with you soon.
+    </p>
+  </header>
+
+  <!-- Contact Form -->
+  <section class="w-full max-w-3xl mx-auto">
+    <div class="bg-white rounded-2xl shadow-card p-8 md:p-12 form-container">
+      <form id="contact-form" action="#" method="POST" novalidate>
+        <div class="grid md:grid-cols-2 gap-6 mb-6">
+          <div>
+            <label for="first-name" class="block text-sm font-semibold text-gray-700 mb-2">First Name</label>
+            <input 
+              type="text" 
+              id="first-name" 
+              name="first_name" 
+              class="w-full px-4 py-3 text-lg border border-gray-300 rounded-xl focus:ring-4 focus:ring-gray-200 input-focus transition" 
+              required 
+            />
+          </div>
+          <div>
+            <label for="last-name" class="block text-sm font-semibold text-gray-700 mb-2">Last Name</label>
+            <input 
+              type="text" 
+              id="last-name" 
+              name="last_name" 
+              class="w-full px-4 py-3 text-lg border border-gray-300 rounded-xl focus:ring-4 focus:ring-gray-200 input-focus transition" 
+              required 
+            />
+          </div>
+        </div>
+
+        <div class="mb-6">
+          <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">Email Address <span class="text-red-500">*</span></label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email" 
+            class="w-full px-4 py-3 text-lg border border-gray-300 rounded-xl focus:ring-4 focus:ring-gray-200 input-focus transition" 
+            placeholder="✉️ Email" 
+            required 
+          />
+        </div>
+
+
+        <div class="mb-6">
+          <label for="message" class="block text-sm font-semibold text-gray-700 mb-2">Message</label>
+          <textarea 
+            id="message" 
+            name="message" 
+            rows="6" 
+            class="w-full px-4 py-3 text-lg border border-gray-300 rounded-xl focus:ring-4 focus:ring-gray-200 input-focus transition resize-none" 
+            placeholder="Write Your Message Here"
+            required
+          ></textarea>
+        </div>
+
+        <button 
+          type="submit" 
+          class="w-full py-4 text-lg font-semibold text-white rounded-xl gradient-btn shadow-md flex items-center justify-center gap-2"
+        >
+          <i class="bi bi-send-fill"></i>
+          Send Message
+        </button>
+
+        <p class="text-xs text-gray-500 text-center mt-4">
+          By submitting this form, you agree to our 
+          <a href="#" class="text-blue-600 hover:underline font-medium">Terms of Service</a> and 
+          <a href="#" class="text-blue-600 hover:underline font-medium">Privacy Policy</a>.
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Location Section -->
+  <section class="w-full max-w-7xl mx-auto mt-24 px-5 md:px-10">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Visit Our Office</h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        We’re located in the heart of San Miguel de Tucumán. Drop by or schedule a visit.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-[1fr_1.8fr] gap-10 items-start">
+      <!-- Location Details -->
+      <div class="bg-white rounded-2xl shadow-card p-8 h-full">
+        <h3 class="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+          <i class="bi bi-geo-alt-fill text-primary-900"></i>
+          Office Details
+        </h3>
+
+        <div class="space-y-6">
+          <div>
+            <h5 class="font-semibold text-gray-800 flex items-center gap-2 mb-2">
+              <i class="bi bi-building text-primary-800"></i> Address
+            </h5>
+            <p class="text-gray-700 text-lg leading-relaxed">
+              San Martín 572<br>
+              San Miguel de Tucumán, Tucumán<br>
+              Argentina
+            </p>
+          </div>
+
+          <div>
+            <h5 class="font-semibold text-gray-800 flex items-center gap-2 mb-2">
+              <i class="bi bi-clock-fill text-primary-800"></i> Hours
+            </h5>
+            <p class="text-gray-700 text-lg">
+              Monday – Friday<br>
+              9:00 AM – 6:00 PM
+            </p>
+          </div>
+
+          <div>
+            <h5 class="font-semibold text-gray-800 flex items-center gap-2 mb-2">
+              <i class="bi bi-telephone-fill text-primary-800"></i> Contact
+            </h5>
+            <p class="text-gray-700 text-lg">
+              <a href="mailto:hello@contactourlives.com" class="hover:text-primary-900 transition">hello@contactourlives.com</a><br>
+              <a href="tel:+15493813933314" class="hover:text-primary-900 transition">+1 (549) 381-393-3314</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Google Map -->
+      <div class="rounded-2xl overflow-hidden shadow-card h-[500px] md:h-[560px]">
+        <iframe
+          class="w-full h-full map-iframe"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3361.774609612755!2d-65.2082158243891!3d-26.824138291030994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94225c15f6b52b2b%3A0x6863017b7e384615!2sSan%20Mart%C3%ADn%20572%2C%20San%20Miguel%20de%20Tucum%C3%A1n%2C%20Tucum%C3%A1n%2C%20Argentina!5e0!3m2!1sen!2s!4v1699658445901!5m2!1sen!2s"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Our Office Location on Google Maps">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Simple JS for form feedback (optional enhancement) -->
+  <script>
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      // In real app: send via fetch/AJAX
+      alert('Thank you! Your message has been sent. We’ll reply within 24 hours.');
+      this.reset();
+    });
+  </script>
+</body>
+</html>
